@@ -5,6 +5,7 @@ import { useQuery } from "urql";
 import { withStyles } from '@material-ui/core/styles';
 import {FormLabel, FormControl, FormGroup} from '@material-ui/core';
 
+import Loading from "./Loading"
 import MetricItem from "./MetricItem"
 
 const query = `
@@ -40,6 +41,11 @@ const MetricsList = ({
     const isSelected = (metric) => metrics.selected.includes(metric)
 
     const toggleMetric = metric => dispatch({ type: actions.METRIC_TOGGLE, metric });
+
+
+    if(fetching){
+      return <Loading />
+    }
 
     return(
       <FormControl component="fieldset" className={classes.formControl}>
