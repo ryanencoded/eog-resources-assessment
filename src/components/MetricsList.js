@@ -8,9 +8,9 @@ import {FormLabel, FormControl, FormGroup} from '@material-ui/core';
 import MetricItem from "./MetricItem"
 
 const query = `
-query {
-  getMetrics
-}
+  query {
+    getMetrics
+  }
 `;
 
 const MetricsList = ({
@@ -18,7 +18,7 @@ const MetricsList = ({
 }) => {
 
     const dispatch = useDispatch();
-    const metrics = useSelector(state => state.metrics.list)
+    const metrics = useSelector(state => state.metrics)
     const [result] = useQuery({
       query
     });
@@ -37,14 +37,20 @@ const MetricsList = ({
       [dispatch, data, error]
     );
 
+    const isSelected = (metric) => metrics.selected.includes(metric)
+
+    const toggleMetric = metric => dispatch({ type: actions.METRIC_TOGGLE, metric });
+
     return(
       <FormControl component="fieldset" className={classes.formControl}>
        <FormLabel component="legend">Select Metrics</FormLabel>
        <FormGroup>
-        {metrics.map((metric, i) => (
+        {metrics.list.map((metric, i) => (
           <MetricItem
             label={metric}
             value={metric}
+            checked={isSelected(metric)}
+            onChange={() => toggleMetric(metric)}
             key={i}
           />
         ))}
