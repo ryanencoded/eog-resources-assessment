@@ -69,11 +69,8 @@ const metricMeasurementUpdate = (state, action) => {
   const { data } = action
 
   let metrics = state.metrics
-  //Check if updated metric is currently selected
-  if(state.selected.indexOf(data.metric) !== -1){
-    metrics[data.metric] = data
-  }
-
+  metrics[data.metric] = data
+  
   return {
     ...state,
     metrics
