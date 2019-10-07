@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../store/actions";
 import moment from "moment"
 import { withStyles } from '@material-ui/core/styles';
-import {Card, CardActions, CardContent, Switch, Typography, FormControlLabel} from '@material-ui/core';
+import {Card, CardActions, CardContent, Switch, Typography, FormControlLabel, Divider} from '@material-ui/core';
 
 const MetricCard = ({
   classes,
@@ -25,13 +25,15 @@ const MetricCard = ({
         <Typography variant="subtitle1" color="textSecondary" gutterBottom>
           {metric}
         </Typography>
-        <Typography variant="h4">
-          {value}{unit}
+        <Typography variant="h5">
+          {value} {unit}
         </Typography>
         <Typography variant="body2">
           {moment(updatedAt).format('MMM D, YYYY H:m:s A')}
         </Typography>
+
       </CardContent>
+      <Divider variant="middle" />
       <CardActions>
         <FormControlLabel
           control={<Switch checked={isSelected(metric)} onChange={() => toggleMetric(metric)} value={metric} />}
