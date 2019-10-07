@@ -9,14 +9,14 @@ const initialState = {
 };
 
 const metricsListReceived = (state, action) => {
-  const { getMetrics } = action;
+  const { metricsList } = action;
 
   //Set default for the current metrics
   let metrics = state.metrics
-  for(let i = 0; i < getMetrics.length; i++){
-    if(!metrics.hasOwnProperty(getMetrics[i])){
-      metrics[getMetrics[i]] = {
-        'metric': getMetrics[i],
+  for(let i = 0; i < metricsList.length; i++){
+    if(!metrics.hasOwnProperty(metricsList[i])){
+      metrics[metricsList[i]] = {
+        'metric': metricsList[i],
         'value': 'N/A',
         'unit': '',
         'at': moment()
@@ -26,7 +26,7 @@ const metricsListReceived = (state, action) => {
 
   return {
     ...state,
-    list: getMetrics
+    list: metricsList
   };
 };
 
