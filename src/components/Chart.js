@@ -49,7 +49,6 @@ const Chart = () => {
     return <Loading />
   }
 
-  console.log(metrics)
   return(
     <XYPlot width={1000} height={600}>
       <VerticalGridLines />
