@@ -40,7 +40,7 @@ export default () => {
 
   return (
     <div>
-      <Grid container>
+      <Grid container justify="center" alignItems="center">
         <Grid item lg={6}>
           <CurrentMetrics />
         </Grid>

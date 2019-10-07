@@ -40,7 +40,7 @@ const CurrentMetrics = () => {
   }, [dispatch, data, error])
 
   return(
-    <Grid container spacing={3}>
+    <Grid container spacing={2} justify="center" alignItems="center">
       {metrics.list.map((key, i) => {
         const metric = metrics.metrics[key]
 
