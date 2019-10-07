@@ -11,7 +11,7 @@ const client = createClient({
 export default () => {
   return (
     <Provider value={client}>
-      <Grid container spacing={3}>
+      <Grid container>
         <Grid item lg={3}>
           <MetricsList />
         </Grid>
