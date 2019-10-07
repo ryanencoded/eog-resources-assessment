@@ -2,6 +2,8 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../store/actions";
 import { useQuery } from "urql";
+import { withStyles } from '@material-ui/core/styles';
+import {FormLabel, FormControl, FormGroup} from '@material-ui/core';
 
 import MetricItem from "./MetricItem"
 
@@ -12,8 +14,9 @@ query {
 `;
 
 const MetricsList = ({
-
+  classes
 }) => {
+
     const dispatch = useDispatch();
     const metrics = useSelector(state => state.metrics.list)
     const [result] = useQuery({
@@ -35,16 +38,29 @@ const MetricsList = ({
     );
 
     return(
-      <div>
-        {metrics.map(metric => (
+      <FormControl component="fieldset" className={classes.formControl}>
+       <FormLabel component="legend">Select Metrics</FormLabel>
+       <FormGroup>
+        {metrics.map((metric, i) => (
           <MetricItem
             label={metric}
             value={metric}
+            key={i}
           />
         ))}
-      </div>
+       </FormGroup>
+      </FormControl>
     )
 
 }
 
-export default MetricsList
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing(3),
+  },
+});
+
+export default withStyles(styles)(MetricsList)

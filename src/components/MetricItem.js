@@ -10,7 +10,7 @@ const MetricItem = ({
 }) => (
   <FormControlLabel
     control={
-      <Checkbox checked={checked} onChange={onChange} value={value} />
+      <Checkbox checked={checked} onChange={onChange} value={value} color="primary" />
     }
     label={label}
   />
