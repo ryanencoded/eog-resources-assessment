@@ -4,7 +4,8 @@ import moment from "moment"
 const initialState = {
   list: [],
   selected: [],
-  measurements: []
+  measurements: [],
+  current: {}
 };
 
 const metricsListReceived = (state, action) => {
@@ -50,10 +51,26 @@ const toggleMetric = (state, action) => {
   };
 };
 
+const metricMeasurementUpdate = (state, action) => {
+  const { data } = action
+
+  let current = state.current
+  //Check if updated metric is currently selected
+  if(state.selected.indexOf(data.metric) !== -1){
+    current[data.metric] = data
+  }
+
+  return {
+    ...state,
+    current
+  }
+}
+
 const handlers = {
   [actions.METRICS_LIST_RECEIVED]: metricsListReceived,
   [actions.METRIC_TOGGLE] : toggleMetric,
-  [actions.METRICS_MEASUREMENTS_RECEIVED]: metricsMeasurementsReceived
+  [actions.METRICS_MEASUREMENTS_RECEIVED]: metricsMeasurementsReceived,
+  [actions.METRIC_MEASUREMENT_UPDATE] : metricMeasurementUpdate
 };
 
 export default (state = initialState, action) => {
