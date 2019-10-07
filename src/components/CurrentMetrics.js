@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../store/actions"
 import { useSubscription } from 'urql'
+import { withStyles } from '@material-ui/core/styles';
 
 import Loading from "./Loading"
 import MetricCard from "./MetricCard"
@@ -20,7 +21,7 @@ const currentMetrics = `
 const handleSubscription = (metrics = [], response) => response.newMeasurement
 
 const CurrentMetrics = ({
-
+  classes
 }) => {
 
   const dispatch = useDispatch()
@@ -41,7 +42,7 @@ const CurrentMetrics = ({
   );
 
   return(
-    <div>
+    <div className={classes.root}>
       {Object.keys(metrics.current).map(metric => (
         <MetricCard
           key={metric}
@@ -55,4 +56,10 @@ const CurrentMetrics = ({
   )
 }
 
-export default CurrentMetrics
+const styles = {
+  root: {
+    display: 'flex'
+  }
+}
+
+export default withStyles(styles)(CurrentMetrics)

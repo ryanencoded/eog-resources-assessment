@@ -29,19 +29,12 @@ export default () => {
   return (
     <Provider value={client}>
 
-      <Grid container>
-        <Grid item lg={3}>
-          <RangeSelect />
-        </Grid>
-        <Grid item lg={9}>
-          <CurrentMetrics />
-        </Grid>
-      </Grid>
-
+      <CurrentMetrics />
 
       <Grid container>
         <Grid item lg={3}>
           <MetricsList />
+          <RangeSelect />
         </Grid>
         <Grid item lg={9}>
           <Chart />
