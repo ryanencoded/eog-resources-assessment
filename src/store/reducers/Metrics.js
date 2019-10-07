@@ -6,7 +6,6 @@ const initialState = {
 
 const metricsListReceived = (state, action) => {
   const { getMetrics } = action;
-  console.log(getMetrics)
   return {
     list: getMetrics
   };
