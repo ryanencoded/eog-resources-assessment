@@ -1,8 +1,10 @@
 import * as actions from "../actions";
+import moment from "moment"
 
 const initialState = {
   list: [],
-  selected: []
+  selected: [],
+  measurements: []
 };
 
 const metricsListReceived = (state, action) => {
@@ -10,6 +12,25 @@ const metricsListReceived = (state, action) => {
   return {
     ...state,
     list: getMetrics
+  };
+};
+
+const metricsMeasurementsReceived = (state, action) => {
+  const { measurements } = action;
+  return {
+    ...state,
+    measurements: measurements.map((metric, i) => {
+      return {
+        ...metric,
+        color: i,
+        measurements: metric.measurements.map(measurement => {
+          return {
+            x: moment(measurement.at).toDate(),
+            y: measurement.value
+          }
+        })
+      }
+    })
   };
 };
 
@@ -31,7 +52,8 @@ const toggleMetric = (state, action) => {
 
 const handlers = {
   [actions.METRICS_LIST_RECEIVED]: metricsListReceived,
-  [actions.METRIC_TOGGLE] : toggleMetric
+  [actions.METRIC_TOGGLE] : toggleMetric,
+  [actions.METRICS_MEASUREMENTS_RECEIVED]: metricsMeasurementsReceived
 };
 
 export default (state = initialState, action) => {
