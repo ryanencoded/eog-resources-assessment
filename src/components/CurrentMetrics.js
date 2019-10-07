@@ -43,15 +43,19 @@ const CurrentMetrics = ({
 
   return(
     <div className={classes.root}>
-      {Object.keys(metrics.current).map(metric => (
-        <MetricCard
-          key={metric}
-          metric={metric}
-          value={metrics.current[metric].value}
-          unit={metrics.current[metric].unit}
-          updatedAt={metrics.current[metric].at}
-        />
-      ))}
+      {metrics.list.map((key, i) => {
+        const metric = metrics.metrics[key]
+
+        return(
+          <MetricCard
+            key={i}
+            metric={key}
+            value={metric.value ? metric.value : 'N/A'}
+            unit={metric.unit ? metric.unit : ''}
+            updatedAt={metric.at ? metric.at : ''}
+          />
+        )
+      })}
     </div>
   )
 }

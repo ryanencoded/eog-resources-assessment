@@ -5,11 +5,25 @@ const initialState = {
   list: [],
   selected: [],
   measurements: [],
-  current: {}
+  metrics: {}
 };
 
 const metricsListReceived = (state, action) => {
   const { getMetrics } = action;
+
+  //Set default for the current metrics
+  let metrics = state.metrics
+  for(let i = 0; i < getMetrics.length; i++){
+    if(!metrics.hasOwnProperty(getMetrics[i])){
+      metrics[getMetrics[i]] = {
+        'metric': getMetrics[i],
+        'value': 'N/A',
+        'unit': '',
+        'at': moment()
+      }
+    }
+  }
+
   return {
     ...state,
     list: getMetrics
@@ -54,15 +68,15 @@ const toggleMetric = (state, action) => {
 const metricMeasurementUpdate = (state, action) => {
   const { data } = action
 
-  let current = state.current
+  let metrics = state.metrics
   //Check if updated metric is currently selected
   if(state.selected.indexOf(data.metric) !== -1){
-    current[data.metric] = data
+    metrics[data.metric] = data
   }
 
   return {
     ...state,
-    current
+    metrics
   }
 }
 
