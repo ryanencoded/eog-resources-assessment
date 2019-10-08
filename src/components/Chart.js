@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../store/actions"
 import { useQuery } from "urql"
+import moment from "moment"
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries} from 'react-vis'
 import Loading from "./Loading"
 
@@ -22,10 +23,14 @@ const Chart = () => {
   const dispatch = useDispatch()
   const metrics = useSelector(state => state.metrics)
 
+  let selected = metrics.selected.map(metric => ({
+    metricName: metric
+  }))
+
   const [result] = useQuery({
     query,
     variables: {
-      metrics: metrics.selected.map(metric => ({ metricName: metric }))
+      metrics: selected
     }
   });
 
