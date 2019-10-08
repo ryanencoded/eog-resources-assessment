@@ -7,6 +7,7 @@ import { Provider as GraphQLProvider, createClient, defaultExchanges, subscripti
 import { ToastContainer } from "react-toastify";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import teal from '@material-ui/core/colors/teal';
 import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./components/Header";
@@ -19,14 +20,12 @@ const theme = createMuiTheme({
     useNextVariants: true
   },
   palette: {
-    primary: {
-      main: "rgb(39,49,66)"
-    },
+    primary: teal,
     secondary: {
-      main: "rgb(197,208,222)"
+      main: '#0091ea',
     },
     background: {
-      main: "rgb(226,231,238)"
+      main: "#eeeeee"
     }
   }
 });
